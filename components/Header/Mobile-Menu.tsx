@@ -3,7 +3,7 @@ import React from 'react'
 import { useState } from 'react';
 import Link from 'next/link';
 
-export default function MobileMenu({ items }) {
+export default function MobileMenu({ items: [] }) {
     const [isOpen, setIsOpen] = useState(false);
   return (
     <div className='md:hidden'>
