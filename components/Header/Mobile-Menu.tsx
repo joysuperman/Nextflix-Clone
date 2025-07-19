@@ -3,8 +3,8 @@
     import { useState } from 'react';
     import Link from 'next/link';
 
-    export default function MobileMenu({ items = [] }) {
-        const [isOpen, setIsOpen] = useState(false);
+    export default function MobileMenu({ items }: { items: { title: string; slag: string }[] }) {
+        const [isOpen, setIsOpen] = useState<boolean>(false);
     return (
         <div className='md:hidden'>
             <button className="btn btn-square btn-ghost" onClick={() => setIsOpen(!isOpen)}>
