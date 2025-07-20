@@ -6,6 +6,14 @@ import { IKUploadResponse } from "imagekitio-next/dist/types/components/IKUpload
 const publicKey = process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY;
 const urlEndpoint = process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT;
 
+// Check if environment variables are set
+if (!publicKey || !urlEndpoint) {
+    console.error("ImageKit environment variables are missing:", {
+        publicKey: !!publicKey,
+        urlEndpoint: !!urlEndpoint
+    });
+}
+
 const authenticator = async () => {
     try {
         // Perform the request to the upload authentication endpoint.
@@ -30,24 +38,26 @@ const authenticator = async () => {
 type IKUploadProps = {
     setVideoUrl?: (videoUrl: string) => void;
     setThumbnailUrl?: (thumbnailUrl: string) => void;
+    id?: string;
 };
 
-export default function Upload({ setVideoUrl, setThumbnailUrl }: IKUploadProps) {
+export default function Upload({ setVideoUrl, setThumbnailUrl, id }: IKUploadProps) {
     const [uploadProgress, setUploadProgress] = useState<number | null>(null);
     const [error, setError] = useState<string | null>(null);
 
     const onError = (err: any) => {
-        console.log("Error", err);
-        setError(err.message);
+        console.error("Upload error:", err);
+        setError(err.message || "Upload failed");
         setUploadProgress(null);
     };
 
     const onSuccess = (res: IKUploadResponse) => {  
+        console.log("Upload success:", res);
         if (setVideoUrl && res.url) {
-        setVideoUrl(res.url);
+            setVideoUrl(res.url);
         }
         if(setThumbnailUrl && res.thumbnailUrl) {
-        setThumbnailUrl(res.url);
+            setThumbnailUrl(res.url);
         }
         setUploadProgress(100);
         setError(null);
@@ -55,8 +65,8 @@ export default function Upload({ setVideoUrl, setThumbnailUrl }: IKUploadProps) 
 
     const onUploadProgress = (evt: ProgressEvent<XMLHttpRequestEventTarget>) => {
         if (evt.lengthComputable) {
-        const progress = Math.round(evt.loaded / evt.total / 100);
-        setUploadProgress(progress);
+            const progress = Math.round((evt.loaded / evt.total) * 100);
+            setUploadProgress(progress);
         }
     };
 
@@ -64,6 +74,25 @@ export default function Upload({ setVideoUrl, setThumbnailUrl }: IKUploadProps) 
         setUploadProgress(0);
         setError(null);
     };
+
+    const validateFile = (file: File) => {
+        // 20MB = 20 * 1024 * 1024 bytes
+        const maxSize = 20 * 1024 * 1024;
+        if (file.size > maxSize) {
+            setError("File size must be less than 20MB");
+            return false;
+        }
+        return true;
+    };
+
+    // Show error if environment variables are missing
+    if (!publicKey || !urlEndpoint) {
+        return (
+            <div className="alert alert-error">
+                <p>ImageKit configuration is missing. Please check your environment variables.</p>
+            </div>
+        );
+    }
 
     return (
         <ImageKitProvider
@@ -73,20 +102,21 @@ export default function Upload({ setVideoUrl, setThumbnailUrl }: IKUploadProps) 
         >
         <IKUpload
             useUniqueFileName={true}
-            validateFile={(file) => file.size < 20 * 1024 * 1024}
+            validateFile={validateFile}
             folder={"/netflix-uploads"}
             onError={onError}
             onSuccess={onSuccess}
             onUploadProgress={onUploadProgress}
             onUploadStart={onUploadStart}
-            className="file-input file-input-ghost"
-            id="thumbnail"
+            className="file-input file-input-primary"
+            id={id}
         />
 
         {/* Show progress bar only when upload is in progress  */}
         {uploadProgress !== null && (
             <div className="mt-4">
                 <progress className="progress w-full" value={uploadProgress} max="100"></progress>
+                <p className="text-sm mt-1">{uploadProgress}%</p>
             </div>
         )}
 

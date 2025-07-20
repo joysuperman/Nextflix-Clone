@@ -1,18 +1,45 @@
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from 'next/font/local'
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
+
+const NetflixSans = localFont({
+  src: [
+    {
+      path: './fonts/NetflixSans/NetflixSans-Light.otf',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: './fonts/NetflixSans/NetflixSans-Regular.otf',
+      weight: '400',
+      style: 'italic',
+    },
+    {
+      path: './fonts/NetflixSans/NetflixSans-Medium.otf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: './fonts/NetflixSans/NetflixSans-Bold.otf',
+      weight: '700',
+      style: 'italic',
+    },
+  ],
+  fallback: ['system-ui', 'arial'],
+  display: 'swap'
 });
 
 export const metadata: Metadata = {
@@ -29,7 +56,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body suppressHydrationWarning={true}
-          className={`${geistSans.variable} ${geistMono.variable}  antialiased`}
+          className={`${NetflixSans.className}  antialiased`}
         >
           {children}
         </body>

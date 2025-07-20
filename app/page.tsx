@@ -38,11 +38,11 @@ export default function Home() {
                 {/* <div className="hero-overlay"></div> */}
                 <div className="hero-content text-neutral-content text-center">
                     <div className="max-w-xl">
-                    <h1 className="mb-5 text-6xl font-bold">Unlimited movies, TV shows, and more</h1>
-                    <h4 className="mb-5 text-lg font-bold">
+                    <h1 className="mb-5 text-6xl font-extrabold">Unlimited movies, TV shows, and more</h1>
+                    <h4 className="mb-5 text-xl font-medium">
                         Starts at USD 2.99. Cancel anytime.
                     </h4>
-                    <button className="btn btn-primary rounded">Get Started</button>
+                    <button className="btn btn-primary btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl rounded">Get Started</button>
                     </div>
                 </div>
             </div>
@@ -51,6 +51,75 @@ export default function Home() {
             <div className="custom-bg-radial"></div>
         </div>
         <main>
+
+            <section className="-mt-20 relative z-20">
+                <div className="container mx-auto py-10 px-2">
+                    <h2 className="text-3xl font-medium text-white mb-6">Trending Now</h2>
+
+                    <div className="grid grid-cols-4 gap-4">
+                        <div className="card">
+                            <div className="card-image">
+                                <Image
+                                    src="/Netflix_Logo_RGB.png"
+                                    alt="Netflix Logo"
+                                    width={150}
+                                    height={80}
+                                    className="mx-auto"
+                                />
+                            </div>
+                            <div className="card-body">
+                                <h2 className="card-title">Welcome to Netflix Clone</h2>
+                                <p className="text-sm">This is a simple Netflix clone built with Next.js, Clerk for authentication, and ImageKit for image uploads.</p>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div className="card-image">
+                                <Image
+                                    src="/Netflix_Logo_RGB.png"
+                                    alt="Netflix Logo"
+                                    width={150}
+                                    height={80}
+                                    className="mx-auto"
+                                />
+                            </div>
+                            <div className="card-body">
+                                <h2 className="card-title">Welcome to Netflix Clone</h2>
+                                <p className="text-sm">This is a simple Netflix clone built with Next.js, Clerk for authentication, and ImageKit for image uploads.</p>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div className="card-image">
+                                <Image
+                                    src="/Netflix_Logo_RGB.png"
+                                    alt="Netflix Logo"
+                                    width={150}
+                                    height={80}
+                                    className="mx-auto"
+                                />
+                            </div>
+                            <div className="card-body">
+                                <h2 className="card-title">Welcome to Netflix Clone</h2>
+                                <p className="text-sm">This is a simple Netflix clone built with Next.js, Clerk for authentication, and ImageKit for image uploads.</p>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div className="card-image">
+                                <Image
+                                    src="/Netflix_Logo_RGB.png"
+                                    alt="Netflix Logo"
+                                    width={150}
+                                    height={80}
+                                    className="mx-auto"
+                                />
+                            </div>
+                            <div className="card-body">
+                                <h2 className="card-title">Welcome to Netflix Clone</h2>
+                                <p className="text-sm">This is a simple Netflix clone built with Next.js, Clerk for authentication, and ImageKit for image uploads.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
     </>
   );

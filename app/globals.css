@@ -4,7 +4,15 @@
 }
 
 @utility btn-primary {
-	@apply bg-[#E50914];
+	@apply bg-[#E50914] rounded;
+}
+.file-input-primary {
+	--btn-color: #e50914;
+	@apply rounded;
+}
+.input,
+select {
+	@apply w-full rounded;
 }
 
 .custom-bg-radial {
@@ -58,4 +66,14 @@
 		rgba(184, 40, 105, 1),
 		rgba(33, 13, 22, 1) 84%
 	);
+}
+
+@utility input {
+	@apply w-full rounded;
+}
+@utility file-input {
+	@apply w-full;
+}
+@utility select {
+	@apply w-full;
 }
