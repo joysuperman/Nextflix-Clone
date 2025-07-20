@@ -14,15 +14,15 @@ const NavItem =[
 
 export default function Navbar() {
     return (
-        <header className="bg-base-100 shadow-sm">
+        <nav className="bg-transparent shadow-sm">
             <div className="container mx-auto">
-                <nav className="navbar">
+                <div className="navbar">
                     <div className="flex-none">
                         <Link href={"/"}>
                             <Image
                                 src="/Netflix_Logo_RGB.png"
                                 alt="Logo"
-                                width={120}
+                                width={150}
                                 height={80}
                             />
                         </Link>
@@ -72,8 +72,8 @@ export default function Navbar() {
                             </Link>
                         </div>
                     </div>
-                </nav>
+                </div>
             </div>
-        </header>
+        </nav>
     )
 }
